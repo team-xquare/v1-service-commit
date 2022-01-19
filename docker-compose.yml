@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+    image: v1-service-commit:latest
+    ports:
+      - 5000:5000
+
+  redis:
+    image: redis
+    container_name: redis
+    restart: always
+    hostname: redis
+    ports:
+      - 6379:6379
+    command: redis-server
