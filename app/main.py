@@ -41,10 +41,7 @@ async def read_commits_rank(sort: str='week'):
             )
             response.append(commit)
         response.sort()
-        print([r.__dict__ for r in response])
         await redis.set(f'sorted_{sort}_commits', json.dumps([r.__dict__ for r in response]))
-
-    print(await redis.get(f'sorted_{sort}_commits'))
     response = json.loads(await redis.get(f'sorted_{sort}_commits'))
 
     return response
